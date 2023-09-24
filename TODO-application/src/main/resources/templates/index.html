@@ -1,0 +1,586 @@
+<!--<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Custom CSS for table styling */
+        body {
+            background-color: #FEDCD2; /* Creative background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F2998C;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            background-color: #f2f2f2; /* Title background color */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 300px;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        .table tr {
+            transition: background-color 0.3s;
+        }
+
+        .table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+        .btn-group-sm .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 3px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-info {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-success {
+            background-color: transparent;
+            color: #28a745;
+            border-color: #28a745;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            background-color: #f2f2f2; /* Inner box background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-todo-box a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .create-todo-box a:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-text {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .create-todo-box a i {
+            font-size: 16px;
+        }
+
+        /* Added CSS for the button margin */
+        .btn-group-sm .btn:not(:last-child) {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><span style="font-family: 'Arial Black', sans-serif; font-size: 48px;">TODO</span> Web Application</h1>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Actions</th>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Is Complete</th>
+            <th>Created At</th>
+            <!--<th>Updated At</th>-->
+     <!--   </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${todoItems}" th:class="${item.isComplete} ? 'alert alert-success' : 'alert alert-warning'">
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">
+                        <i class="bi bi-pencil-fill"></i> Edit</a>
+                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">
+                        <i class="bi bi-trash-fill"></i> Delete</a>
+                </div>
+            </td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <span th:if="${item.isComplete} == true" th:text="Yes"></span>
+                <span th:unless="${item.isComplete} == true" th:text="No"></span>
+            </td>
+            <td th:text="${item.createdAt}"></td>
+           <!-- <td th:text="${item.updatedAt}"></td> -->
+    <!--    </tr>
+        </tbody>
+    </table>
+
+    <div class="create-todo-box">
+        <a class="btn btn-outline-success" href="/create-todo">
+            <span class="create-todo-text"> Create</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
+    </div>
+</div>
+</body>
+</html>  -->
+<!--
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Custom CSS for table styling */
+        body {
+            background-color: #FEDCD2; /* Creative background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F2998C;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            background-color: #f2f2f2; /* Title background color */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 300px;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        .table tr {
+            transition: background-color 0.3s;
+        }
+
+        .table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+        .btn-group-sm .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 3px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-info {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-success {
+            background-color: transparent;
+            color: #28a745;
+            border-color: #28a745;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            background-color: #f2f2f2; /* Inner box background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-todo-box a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .create-todo-box a:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-text {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .create-todo-box a i {
+            font-size: 16px;
+        }
+
+        /* Added CSS for the button margin */
+        .btn-group-sm .btn:not(:last-child) {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><span style="font-family: 'Arial Black', sans-serif; font-size: 48px;">TODO</span> Web Application</h1>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Actions</th>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Is Complete</th>
+            <th>Created At</th>  -->
+            <!--<th>Updated At</th>-->
+     <!--   </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${todoItems}" th:class="${item.isComplete} ? 'alert alert-success' : 'alert alert-warning'">
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">
+                        <i class="bi bi-pencil-fill"></i> Edit</a>
+                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">
+                        <i class="bi bi-trash-fill"></i> Delete</a>
+                </div>
+            </td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <span th:if="${item.isComplete} == true" th:text="Yes"></span>
+                <span th:unless="${item.isComplete} == true" th:text="No"></span>
+            </td>
+            <td th:text="${#dates.format(item.createdAt, 'dd-MM-yyyy HH:mm')}"></td>  -->
+            <!--<td th:text="${#dates.format(item.updatedAt, 'dd-MM-yyyy HH:mm')}"></td>-->
+     <!--   </tr>
+        </tbody>
+    </table>
+
+    <div class="create-todo-box">
+        <a class="btn btn-outline-success" href="/create-todo">
+            <span class="create-todo-text"> Create</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
+    </div>
+</div>
+</body>
+</html>
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Custom CSS for table styling */
+        body {
+            background-color: #FEDCD2; /* Creative background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F2998C;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+            background-color: #f2f2f2; /* Title background color */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 300px;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        .table tr {
+            transition: background-color 0.3s;
+        }
+
+        .table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+        .btn-group-sm .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            border-radius: 3px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-info {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
+
+        .btn-outline-success {
+            background-color: transparent;
+            color: #28a745;
+            border-color: #28a745;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            background-color: #f2f2f2; /* Inner box background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-todo-box a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .create-todo-box a:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .create-todo-text {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .create-todo-box a i {
+            font-size: 16px;
+        }
+
+        /* Added CSS for the button margin */
+        .btn-group-sm .btn:not(:last-child) {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><span style="font-family: 'Arial Black', sans-serif; font-size: 48px;">TODO</span> Web Application</h1>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Is Complete</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${todoItems}" th:class="${item.isComplete} ? 'alert alert-success' : 'alert alert-warning'">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.description}"></td>
+            <td>
+                <span th:if="${item.isComplete} == true" th:text="Yes"></span>
+                <span th:unless="${item.isComplete} == true" th:text="No"></span>
+            </td>
+            <td th:text="${#dates.format(item.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${#dates.format(item.updatedAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <a class="btn btn-info" th:href="@{/edit/{id}(id=${item.id})}">
+                        <i class="bi bi-pencil-fill"></i> Edit</a>
+                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${item.id})}">
+                        <i class="bi bi-trash-fill"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="create-todo-box">
+        <a class="btn btn-outline-success" href="/create-todo">
+            <span class="create-todo-text"> Create</span>
+            <i class="bi bi-plus-square-fill"></i>
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+
